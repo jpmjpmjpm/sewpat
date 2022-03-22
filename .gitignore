@@ -9,6 +9,9 @@
 # IntelliJ
 out/
 
+# postactivate file
+postactivate
+
 # Python caching files
 __pycache__/
 sewpat/__pycache__/
