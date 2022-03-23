@@ -1,6 +1,6 @@
 from django.shortcuts import redirect
 
 
-def main_view(request):
-    response = redirect('api/')
+def index_view(request):
+    response = redirect('sewpatd:api-root')
     return response

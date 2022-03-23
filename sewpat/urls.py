@@ -15,15 +15,14 @@ Including another URL conf
 """
 from django.contrib import admin
 from django.urls import include, path
-
-from .views import main_view
-
 from rest_framework.authtoken import views as auth_views
 
+from .views import index_view
+
 urlpatterns = [
-    path('', main_view),
+    path('', index_view),
     path('admin/', admin.site.urls),
-    path('api/', include('sewpatd.urls', namespace='api')),
+    path('api/', include('sewpatd.urls')),
     path('token-auth/', auth_views.obtain_auth_token),
     path('api-auth/', include("rest_framework.urls")),
 ]
