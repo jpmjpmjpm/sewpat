@@ -92,6 +92,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = '/webapps/sewpat/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
 # Global CORS setup
 # https://fractalideas.com/blog/making-react-and-django-play-well-together/
