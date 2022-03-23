@@ -29,9 +29,9 @@ def test_sewing_pattern_create_save():
     assert sp_name in str(sp)
 
 
-# Sewing pattern creation and retrieval from APIs
+# Sewing pattern creation and list from APIs
 @pytest.mark.django_db
-def test_sewing_pattern_create_api_retrieval(sewpat_user):
+def test_sewing_pattern_create_api_list(sewpat_user):
     sp_name = 'lanvin-dress-1955'
     sp = create_sp(sp_name)
     sp.save()
@@ -44,3 +44,20 @@ def test_sewing_pattern_create_api_retrieval(sewpat_user):
 
     assert response.status_code == status.HTTP_200_OK
     assert response.data[0]['name'] == sp_name
+
+
+# Sewing pattern creation and retrieval from APIs
+@pytest.mark.django_db
+def test_sewing_pattern_create_api_retrieval(sewpat_user):
+    sp_name = 'lanvin-dress-1955'
+    sp = create_sp(sp_name)
+    sp.save()
+
+    factory = APIRequestFactory()
+    request = factory.get(reverse('sewpatd:pattern-detail', args=[sp.id]), format='json')
+    force_authenticate(request, user=sewpat_user)
+    view = SewingPatternViewSet.as_view({'get': 'retrieve'})
+    response = view(request, pk=sp.pk)
+
+    assert response.status_code == status.HTTP_200_OK
+    assert response.data['name'] == sp_name
