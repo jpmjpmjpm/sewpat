@@ -5,7 +5,7 @@ from rest_framework import routers
 from .views import SewingPatternViewSet
 
 router = routers.DefaultRouter()
-router.register(r'patterns', SewingPatternViewSet)
+router.register(r'patterns', SewingPatternViewSet, basename='pattern')
 
 app_name = 'sewpatd'
 urlpatterns = [
