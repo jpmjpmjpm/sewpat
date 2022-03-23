@@ -24,9 +24,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'sewpatd',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -90,6 +92,14 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = '/webapps/sewpat/static/'
+
+# Global CORS setup
+# https://fractalideas.com/blog/making-react-and-django-play-well-together/
+# https://github.com/adamchainz/django-cors-headers
+# TODO Define the CORS rules in conjunction with CRSF and credentials
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
