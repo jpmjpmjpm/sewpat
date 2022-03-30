@@ -16,11 +16,6 @@ class SewingPattern(models.Model):
                                    help_text=_('Description (maximum %(length)s characters)') % {
                                        'length': DESCRIPTION_LENGTH})
 
-    DRAWING_LENGTH = 100000
-    drawing = models.JSONField(max_length=DRAWING_LENGTH, blank=True, null=True, verbose_name=_('drawing'),
-                               help_text=_('JSON representation of the drawing (maximum %(length)s bytes)') % {
-                                   'length': DRAWING_LENGTH})
-
     class Meta:
         ordering = ['name']
 
@@ -42,6 +37,6 @@ class Drawing(models.Model):
                                        verbose_name=_('Link to pattern'))
 
     DRAWING_LENGTH = 100000
-    drawing = models.JSONField(max_length=DRAWING_LENGTH, blank=True, null=True, verbose_name=_('drawing'),
-                               help_text=_('JSON representation of the drawing (maximum %(length)s bytes)') % {
-                                   'length': DRAWING_LENGTH})
+    image = models.JSONField(max_length=DRAWING_LENGTH, blank=True, null=True, verbose_name=_('Image'),
+                             help_text=_('Image in custom JSON format (maximum %(length)s bytes)') % {
+                                 'length': DRAWING_LENGTH})
