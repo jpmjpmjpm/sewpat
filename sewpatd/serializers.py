@@ -18,7 +18,7 @@ class SewingPatternSerializer(serializers.ModelSerializer):
 class DrawingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Drawing
-        fields = ['id', 'name', 'description', 'image']
+        fields = ['id', 'name', 'description', 'points', 'segments', 'curves']
 
     def create(self, data):
         sewing_pattern = SewingPattern.objects.get(pk=self.context["view"].kwargs["pattern_pk"])

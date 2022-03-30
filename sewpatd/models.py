@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 NAME_LENGTH = 60
 DESCRIPTION_LENGTH = 300
+GEOMETRY_LENGTH = 100000
 
 
 class SewingPattern(models.Model):
@@ -36,10 +37,17 @@ class Drawing(models.Model):
     sewing_pattern = models.ForeignKey(SewingPattern, on_delete=models.CASCADE, related_name='drawings',
                                        verbose_name=_('Link to pattern'))
 
-    DRAWING_LENGTH = 100000
-    image = models.JSONField(max_length=DRAWING_LENGTH, blank=True, null=True, verbose_name=_('Image'),
-                             help_text=_('Image in custom JSON format (maximum %(length)s bytes)') % {
-                                 'length': DRAWING_LENGTH})
+    points = models.JSONField(max_length=GEOMETRY_LENGTH, blank=True, null=True, verbose_name=_('Points'),
+                              help_text=_('Points in custom JSON format (maximum %(length)s bytes)') % {
+                                  'length': GEOMETRY_LENGTH})
+
+    segments = models.JSONField(max_length=GEOMETRY_LENGTH, blank=True, null=True, verbose_name=_('Segments'),
+                                help_text=_('Segments in custom JSON format (maximum %(length)s bytes)') % {
+                                    'length': GEOMETRY_LENGTH})
+
+    curves = models.JSONField(max_length=GEOMETRY_LENGTH, blank=True, null=True, verbose_name=_('Curves'),
+                              help_text=_('Curves in custom JSON format (maximum %(length)s bytes)') % {
+                                  'length': GEOMETRY_LENGTH})
 
     class Meta:
         ordering = ['name']
