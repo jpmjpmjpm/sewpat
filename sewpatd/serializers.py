@@ -1,6 +1,9 @@
 #  Copyright (c) 2020. Jean-Pierre Merx All rights reserved.
 
+
+from django.db import IntegrityError
 from rest_framework import serializers
+from rest_framework.serializers import ValidationError
 
 from .models import SewingPattern, Drawing
 
@@ -20,5 +23,8 @@ class DrawingSerializer(serializers.ModelSerializer):
     def create(self, data):
         sewing_pattern = SewingPattern.objects.get(pk=self.context["view"].kwargs["pattern_pk"])
         data['sewing_pattern'] = sewing_pattern
-        obj = super().create(data)
+        try:
+            obj = super().create(data)
+        except IntegrityError as e:
+            raise ValidationError(repr(e))
         return obj
