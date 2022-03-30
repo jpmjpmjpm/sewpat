@@ -24,7 +24,7 @@ class SewingPattern(models.Model):
 
 
 class Drawing(models.Model):
-    name = models.CharField(max_length=NAME_LENGTH, blank=False, unique=True,
+    name = models.CharField(max_length=NAME_LENGTH, blank=False,
                             verbose_name=_('Name'), db_index=True,
                             help_text=_('Unique name (maximum %(length)s characters)') % {'length': NAME_LENGTH})
 
@@ -40,3 +40,11 @@ class Drawing(models.Model):
     image = models.JSONField(max_length=DRAWING_LENGTH, blank=True, null=True, verbose_name=_('Image'),
                              help_text=_('Image in custom JSON format (maximum %(length)s bytes)') % {
                                  'length': DRAWING_LENGTH})
+
+    class Meta:
+        ordering = ['name']
+        constraints = [
+            models.UniqueConstraint(fields=['sewing_pattern', 'name'], name=_('Unique name per sewing pattern'))]
+
+    def __str__(self):
+        return self.name
