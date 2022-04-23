@@ -1,5 +1,7 @@
-# noinspection PyUnresolvedReferences
 from os import getenv
+
+# noinspection PyUnresolvedReferences
+from .base import *
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = getenv('DJANGO_SECRET_KEY')
